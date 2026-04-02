@@ -95,7 +95,8 @@
         .pdfcomb-spinner { width:1rem;height:1rem;border-radius:50%;flex-shrink:0;border:2px solid var(--pc-border);border-top-color:var(--pc-accent);animation:pdfcomb-spin .7s linear infinite; }
         @keyframes pdfcomb-spin { to { transform:rotate(360deg); } }
         /* Filter notice */
-        .pdfcomb-filter-notice { background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.55rem .85rem;font-size:.8rem;color:var(--pc-warning);margin-bottom:.75rem; }
+        .pdfcomb-filter-notice { display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.55rem .85rem;font-size:.8rem;color:var(--pc-warning);margin-bottom:.75rem; }
+        .pdfcomb-filter-notice svg { width:1rem!important;height:1rem!important;flex-shrink:0;margin-top:.1rem; }
         /* Search */
         .pdfcomb-search-row { margin-bottom:.75rem; }
         .pdfcomb-search-wrap { display:flex;align-items:stretch;border:1px solid var(--pc-border);border-radius:8px;overflow:hidden; }
