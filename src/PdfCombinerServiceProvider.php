@@ -28,13 +28,13 @@ class PdfCombinerServiceProvider extends PackageServiceProvider
         // pdf.worker.min.js is NOT registered here; it must be a publicly accessible file
         // (its URL is passed to pdf.js via window.pdfCombiner_workerSrc).
         FilamentAsset::register(
-            assets: [
+            [
                 Js::make('pdf-lib', __DIR__ . '/../resources/dist/pdf-lib.min.js'),
                 Js::make('pdfjs', __DIR__ . '/../resources/dist/pdf.min.js'),
                 Js::make('pdf-combiner-scripts', __DIR__ . '/../resources/dist/pdf-combiner.js'),
                 Css::make('bootstrap-icons', __DIR__ . '/../resources/dist/bootstrap-icons.css'),
             ],
-            packageName: 'mickyyman/pdf-combiner',
+            'mickyyman/pdf-combiner',
         );
 
         // Publish the Web Worker file and icon fonts to the public directory.
