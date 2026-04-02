@@ -371,6 +371,54 @@
         };
 
         // -------------------------------------------------------
+        // Email body — live link preview
+        // -------------------------------------------------------
+        (function () {
+            const bodyEl        = document.getElementById('pdfcomb-emailBody');
+            const previewEl     = document.getElementById('pdfcomb-emailBodyPreview');
+            const previewLabel  = document.getElementById('pdfcomb-emailBodyPreviewLabel');
+            if (!bodyEl || !previewEl) return;
+
+            const LINK_RE = new RegExp(
+                '(https?:\/\/[^\\s&<]+)' +
+                '|([a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,})',
+                'g'
+            );
+
+            function linkifyBody(text) {
+                const esc = text
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+                return esc.replace(LINK_RE, function (match) {
+                    if (/^https?:\/\//i.test(match)) {
+                        return '<a href="' + match + '" target="_blank" rel="noopener noreferrer">' + match + '</a>';
+                    }
+                    return '<a href="mailto:' + match + '">' + match + '</a>';
+                }).replace(/\n/g, '<br>');
+            }
+
+            function updatePreview() {
+                LINK_RE.lastIndex = 0;
+                const text     = bodyEl.value;
+                const hasLinks = LINK_RE.test(text);
+                LINK_RE.lastIndex = 0;
+                if (hasLinks) {
+                    previewEl.innerHTML = linkifyBody(text);
+                    previewEl.style.display = 'block';
+                    if (previewLabel) previewLabel.style.display = 'block';
+                } else {
+                    previewEl.style.display = 'none';
+                    if (previewLabel) previewLabel.style.display = 'none';
+                }
+            }
+
+            bodyEl.addEventListener('input', updatePreview);
+            window.addEventListener('pdfcomb-open-email-modal', updatePreview);
+            updatePreview();
+        }());
+
+        // -------------------------------------------------------
         // Status helpers
         // -------------------------------------------------------
         function showPreviewStatus(msg) { previewStatusText.textContent = msg; previewStatus.classList.remove('hidden'); }
@@ -423,13 +471,13 @@
             if (total > 0) {
                 const bd = terms.map(t => escapeHtml(t) + '(' + perTerm[t].count + ')').join(', ');
                 searchResults.innerHTML =
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline w-4 h-4 mr-1 text-green-500"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style="width:1rem;height:1rem;display:inline;vertical-align:middle;margin-right:.2rem;color:#22c55e;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>' +
                     total + ' match' + (total > 1 ? 'es' : '') + ' on ' + matchPages.length + ' page' + (matchPages.length > 1 ? 's' : '') + '. ' +
                     (terms.length > 1 ? 'Breakdown: ' + bd + '. ' : '') + 'Pages: ' + matchPages.join(', ');
                 previewPages.querySelector('[data-page-num="' + matchPages[0] + '"]')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
                 searchResults.innerHTML =
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline w-4 h-4 mr-1 text-red-500"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" /></svg>' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style="width:1rem;height:1rem;display:inline;vertical-align:middle;margin-right:.2rem;color:#ef4444;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" /></svg>' +
                     'No matches for ' + terms.map(t => '"' + escapeHtml(t) + '"').join(', ');
             }
         }
