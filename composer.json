@@ -1,0 +1,69 @@
+{
+    "name": "mickyyman/pdf-combiner",
+    "description": "A Filament 5 plugin that adds a PDF Combiner page to merge multiple PDF files entirely in the browser.",
+    "keywords": [
+        "mickyyman",
+        "laravel",
+        "filamentphp",
+        "filament",
+        "filament-plugin",
+        "pdf-combiner",
+        "pdf"
+    ],
+    "homepage": "https://github.com/mickyyman/pdf-combiner",
+    "support": {
+        "issues": "https://github.com/mickyyman/pdf-combiner/issues",
+        "source": "https://github.com/mickyyman/pdf-combiner"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Micky",
+            "email": "author@domain.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^5.0",
+        "spatie/laravel-package-tools": "^1.16"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^8.1.1",
+        "orchestra/testbench": "^10.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mickyyman\\PdfCombiner\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mickyyman\\PdfCombiner\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "test": "./vendor/bin/pest",
+        "test:coverage": "./vendor/bin/pest --coverage",
+        "lint": "./vendor/bin/pint"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mickyyman\\PdfCombiner\\PdfCombinerServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
