@@ -17,6 +17,12 @@ class PdfCombiner extends Page
 
     public string $excludePhrase = '';
 
+    public string $emailRecipient = '';
+
+    public string $emailSubject = '';
+
+    public string $emailMessage = '';
+
     public static function getNavigationGroup(): ?string
     {
         return PdfCombinerPlugin::get()->getNavigationGroup();
@@ -29,6 +35,10 @@ class PdfCombiner extends Page
 
     public function mount(): void
     {
-        $this->excludePhrase = PdfCombinerPlugin::get()->getExcludePhrase();
+        $plugin = PdfCombinerPlugin::get();
+        $this->excludePhrase  = $plugin->getExcludePhrase();
+        $this->emailRecipient = $plugin->getEmailRecipient();
+        $this->emailSubject   = $plugin->getEmailSubject();
+        $this->emailMessage   = $plugin->getEmailMessage();
     }
 }

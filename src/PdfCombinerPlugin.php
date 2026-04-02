@@ -14,6 +14,12 @@ class PdfCombinerPlugin implements Plugin
 
     protected ?int $navigationSort = null;
 
+    protected ?string $emailRecipient = null;
+
+    protected ?string $emailSubject = null;
+
+    protected ?string $emailMessage = null;
+
     // ------------------------------------------------------------------ //
     //  Factory
     // ------------------------------------------------------------------ //
@@ -73,6 +79,42 @@ class PdfCombinerPlugin implements Plugin
     public function getNavigationSort(): ?int
     {
         return $this->navigationSort;
+    }
+
+    public function emailRecipient(string $recipient): static
+    {
+        $this->emailRecipient = $recipient;
+
+        return $this;
+    }
+
+    public function getEmailRecipient(): string
+    {
+        return $this->emailRecipient ?? config('pdf-combiner.email_recipient', '');
+    }
+
+    public function emailSubject(string $subject): static
+    {
+        $this->emailSubject = $subject;
+
+        return $this;
+    }
+
+    public function getEmailSubject(): string
+    {
+        return $this->emailSubject ?? config('pdf-combiner.email_subject', 'Merged PDF');
+    }
+
+    public function emailMessage(string $message): static
+    {
+        $this->emailMessage = $message;
+
+        return $this;
+    }
+
+    public function getEmailMessage(): string
+    {
+        return $this->emailMessage ?? config('pdf-combiner.email_message', 'Please find the merged PDF attached.');
     }
 
     // ------------------------------------------------------------------ //

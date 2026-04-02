@@ -2,7 +2,10 @@
     {{-- Inject runtime config for pdf-combiner.js --}}
     <script>
         window.pdfCombiner_workerSrc     = "{{ asset('vendor/mickyyman/pdf-combiner/pdf.worker.min.js') }}";
-        window.pdfCombiner_excludePhrase = @js($this->excludePhrase);
+        window.pdfCombiner_excludePhrase  = @js($this->excludePhrase);
+        window.pdfCombiner_emailRecipient = @js($this->emailRecipient);
+        window.pdfCombiner_emailSubject   = @js($this->emailSubject);
+        window.pdfCombiner_emailMessage   = @js($this->emailMessage);
     </script>
 
     <style>
@@ -334,15 +337,15 @@
                 <div class="pdfcomb-modal-body">
                     <div class="pdfcomb-form-group">
                         <label class="pdfcomb-form-label" for="pdfcomb-emailTo">Recipient</label>
-                        <input type="email" class="pdfcomb-form-ctrl" id="pdfcomb-emailTo" placeholder="recipient@example.com">
+                        <input type="email" class="pdfcomb-form-ctrl" id="pdfcomb-emailTo" placeholder="recipient@example.com" value="{{ $this->emailRecipient }}">
                     </div>
                     <div class="pdfcomb-form-group">
                         <label class="pdfcomb-form-label" for="pdfcomb-emailSubject">Subject</label>
-                        <input type="text" class="pdfcomb-form-ctrl" id="pdfcomb-emailSubject" value="Merged PDF">
+                        <input type="text" class="pdfcomb-form-ctrl" id="pdfcomb-emailSubject" value="{{ $this->emailSubject }}">
                     </div>
                     <div class="pdfcomb-form-group">
                         <label class="pdfcomb-form-label" for="pdfcomb-emailBody">Message</label>
-                        <textarea class="pdfcomb-form-ctrl" id="pdfcomb-emailBody" rows="3" style="resize:vertical;">Please find the merged PDF attached.</textarea>
+                        <textarea class="pdfcomb-form-ctrl" id="pdfcomb-emailBody" rows="3" style="resize:vertical;">{{ $this->emailMessage }}</textarea>
                     </div>
                     <div class="pdfcomb-modal-notice">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="pdfcomb-icon-sm" style="margin-top:.15rem;flex-shrink:0;">
