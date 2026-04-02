@@ -379,7 +379,8 @@
             function resize() { bodyEl.style.height = 'auto'; bodyEl.style.height = bodyEl.scrollHeight + 'px'; }
             bodyEl.style.overflow = 'hidden';
             bodyEl.addEventListener('input', resize);
-            window.addEventListener('pdfcomb-open-email-modal', resize);
+            // Defer so Alpine has finished setting display:block on the modal
+            window.addEventListener('pdfcomb-open-email-modal', function () { setTimeout(resize, 50); });
             resize();
         }());
 
