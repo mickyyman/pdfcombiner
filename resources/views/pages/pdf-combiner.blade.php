@@ -131,11 +131,6 @@
         .pdfcomb-form-ctrl    { width:100%;background:transparent;border:1px solid var(--pc-border);border-radius:8px;padding:.4rem .7rem;font-size:.875rem;color:var(--pc-text);outline:none;transition:border-color .2s;box-sizing:border-box; }
         .pdfcomb-form-ctrl:focus { border-color:var(--pc-accent);box-shadow:0 0 0 3px rgba(124,58,237,.2); }
         .pdfcomb-modal-notice { background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.6rem .8rem;font-size:.78rem;color:var(--pc-warning);display:flex;align-items:flex-start;gap:.4rem; }
-        /* Email body link preview */
-        .pdfcomb-email-preview-label { display:none; }
-        .pdfcomb-email-preview { display:none;margin-top:.4rem;border:1px solid var(--pc-border);border-radius:8px;padding:.4rem .7rem;font-size:.875rem;color:var(--pc-text);background:transparent;line-height:1.5;word-break:break-word;white-space:pre-wrap; }
-        .pdfcomb-email-preview a { color:var(--pc-accent);text-decoration:underline; }
-        .pdfcomb-email-preview a:hover { color:var(--pc-accent-h); }
         /* Footer */
         .pdfcomb-footer { text-align:center;font-size:.75rem;margin-top:1rem;color:var(--pc-muted);display:flex;align-items:center;justify-content:center;gap:.3rem; }
         /* Toast */
@@ -350,9 +345,7 @@
                     </div>
                     <div class="pdfcomb-form-group">
                         <label class="pdfcomb-form-label" for="pdfcomb-emailBody">Message</label>
-                        <textarea class="pdfcomb-form-ctrl" id="pdfcomb-emailBody" rows="3" style="resize:vertical;">{{ $this->emailMessage }}</textarea>
-                        <label class="pdfcomb-form-label pdfcomb-email-preview-label" id="pdfcomb-emailBodyPreviewLabel">Link preview</label>
-                        <div id="pdfcomb-emailBodyPreview" class="pdfcomb-email-preview"></div>
+                        <textarea class="pdfcomb-form-ctrl" id="pdfcomb-emailBody" rows="1" style="resize:none;overflow:hidden;">{{ $this->emailMessage }}</textarea>
                     </div>
                     <div class="pdfcomb-modal-notice">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="pdfcomb-icon-sm" style="margin-top:.15rem;flex-shrink:0;">

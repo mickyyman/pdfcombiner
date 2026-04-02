@@ -371,51 +371,16 @@
         };
 
         // -------------------------------------------------------
-        // Email body — live link preview
+        // Email body — auto-resize textarea
         // -------------------------------------------------------
         (function () {
-            const bodyEl        = document.getElementById('pdfcomb-emailBody');
-            const previewEl     = document.getElementById('pdfcomb-emailBodyPreview');
-            const previewLabel  = document.getElementById('pdfcomb-emailBodyPreviewLabel');
-            if (!bodyEl || !previewEl) return;
-
-            const LINK_RE = new RegExp(
-                '(https?:\/\/[^\\s&<]+)' +
-                '|([a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,})',
-                'g'
-            );
-
-            function linkifyBody(text) {
-                const esc = text
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;');
-                return esc.replace(LINK_RE, function (match) {
-                    if (/^https?:\/\//i.test(match)) {
-                        return '<a href="' + match + '" target="_blank" rel="noopener noreferrer">' + match + '</a>';
-                    }
-                    return '<a href="mailto:' + match + '">' + match + '</a>';
-                }).replace(/\n/g, '<br>');
-            }
-
-            function updatePreview() {
-                LINK_RE.lastIndex = 0;
-                const text     = bodyEl.value;
-                const hasLinks = LINK_RE.test(text);
-                LINK_RE.lastIndex = 0;
-                if (hasLinks) {
-                    previewEl.innerHTML = linkifyBody(text);
-                    previewEl.style.display = 'block';
-                    if (previewLabel) previewLabel.style.display = 'block';
-                } else {
-                    previewEl.style.display = 'none';
-                    if (previewLabel) previewLabel.style.display = 'none';
-                }
-            }
-
-            bodyEl.addEventListener('input', updatePreview);
-            window.addEventListener('pdfcomb-open-email-modal', updatePreview);
-            updatePreview();
+            const bodyEl = document.getElementById('pdfcomb-emailBody');
+            if (!bodyEl) return;
+            function resize() { bodyEl.style.height = 'auto'; bodyEl.style.height = bodyEl.scrollHeight + 'px'; }
+            bodyEl.style.overflow = 'hidden';
+            bodyEl.addEventListener('input', resize);
+            window.addEventListener('pdfcomb-open-email-modal', resize);
+            resize();
         }());
 
         // -------------------------------------------------------
