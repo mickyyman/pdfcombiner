@@ -9,7 +9,7 @@ class PdfCombiner extends Page
 {
     protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-document-duplicate';
 
-    protected static string $view = 'pdf-combiner::pages.pdf-combiner';
+    protected string $view = 'pdf-combiner::pages.pdf-combiner';
 
     protected static ?string $title = 'PDF Combiner';
 
