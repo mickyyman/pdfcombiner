@@ -7,7 +7,7 @@ use Mickyyman\PdfCombiner\PdfCombinerPlugin;
 
 class PdfCombiner extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-document-duplicate';
 
     protected static string $view = 'pdf-combiner::pages.pdf-combiner';
 
