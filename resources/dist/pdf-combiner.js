@@ -189,7 +189,7 @@
             if (skippedTotal > 0) {
                 filterNotice.style.display = 'block';
                 filterNotice.innerHTML =
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline w-4 h-4 mr-1"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style="width:1rem;height:1rem;display:inline;vertical-align:middle;margin-right:.25rem;"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>' +
                     'Skipped ' + skippedTotal + ' page' + (skippedTotal !== 1 ? 's' : '') +
                     ' containing &ldquo;' + escapeHtml(PAGE_EXCLUDE_PHRASE) + '&rdquo;. ' +
                     skippedDetails.map(d => escapeHtml(d.name) + ': pages ' + d.pages.join(', ')).join(' &middot; ');

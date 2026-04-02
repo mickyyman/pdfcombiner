@@ -13,16 +13,16 @@
             --pc-danger:   #ef4444;
             --pc-success:  #22c55e;
             --pc-warning:  #f59e0b;
-            --pc-surface:  rgb(var(--gray-100));
-            --pc-border:   rgb(var(--gray-200));
-            --pc-muted:    rgb(var(--gray-400));
-            --pc-text:     rgb(var(--gray-900));
+            --pc-surface:  #f9fafb;
+            --pc-border:   #e5e7eb;
+            --pc-muted:    #9ca3af;
+            --pc-text:     #111827;
         }
         .dark .pdfcomb-wrap {
-            --pc-surface: rgb(var(--gray-800));
-            --pc-border:  rgb(var(--gray-700));
-            --pc-muted:   rgb(var(--gray-400));
-            --pc-text:    rgb(var(--gray-100));
+            --pc-surface: #1f2937;
+            --pc-border:  #374151;
+            --pc-muted:   #9ca3af;
+            --pc-text:    #f9fafb;
         }
         /* Step bar */
         .pdfcomb-steps-bar { display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem; }
